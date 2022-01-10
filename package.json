@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "yarn nodemon src/index.js",
-    "start": "node src/index.js"
+    "start": "pm2 start src/index.js --watch --no-daemon"
   },
   "dependencies": {
     "aws-sdk": "^2.1050.0",
@@ -14,7 +14,8 @@
     "mongoose": "^6.1.5",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
-    "multer-s3": "^2.10.0"
+    "multer-s3": "^2.10.0",
+    "pm2": "^5.1.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

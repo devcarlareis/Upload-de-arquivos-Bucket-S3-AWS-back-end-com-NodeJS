@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+  db:
+    image: mongo
+    container_name: api-upload-test
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      ME_CONFIG_MONGODB_DATABASE: ${DB_NAME}
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASS}
+      ME_CONFIG_MONGODB_URL: ${MONGOURL}
+  api:
+    image: node:latest
+    container_name: api-testupload-node-docker
+    restart: always
+    env_file:
+      - .env
+    depends_on: 
+      - db
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: yarn start
+    logging: 
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '5'

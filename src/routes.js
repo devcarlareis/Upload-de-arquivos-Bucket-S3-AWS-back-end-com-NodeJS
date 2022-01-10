@@ -4,9 +4,15 @@ const multerConfig = require('./config/multer')
 
 const Post = require('./models/Post');
 
+routes.get('/', async (req, res) => {
+  return res.json('Hello')
+})
+
 routes.get('/posts', async (req, res) => {
   const posts = await Post.find();
+  return res.json(posts)
 })
+
 
 routes.post('/posts', multer(multerConfig).single('file'), async (req, res) => {
   console.log(req.file);
@@ -21,6 +27,7 @@ routes.post('/posts', multer(multerConfig).single('file'), async (req, res) => {
   })
   return res.json(post)
 });
+
 
 routes.delete('/posts/:id', async (req, res) => {
   const post = await Post.findById(req.params.id);
