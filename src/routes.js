@@ -15,8 +15,6 @@ routes.get('/posts', async (req, res) => {
 
 
 routes.post('/posts', multer(multerConfig).single('file'), async (req, res) => {
-  console.log(req.file);
-
   const { originalname: name, size, key, location: url = '' } = req.file
 
   const post = await Post.create({
@@ -25,6 +23,7 @@ routes.post('/posts', multer(multerConfig).single('file'), async (req, res) => {
     key,
     url,
   })
+  console.log('postdb', post)
   return res.json(post)
 });
 

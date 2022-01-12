@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "yarn nodemon src/index.js",
-    "start": "pm2 start src/index.js --watch --no-daemon"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "aws-sdk": "^2.1050.0",
